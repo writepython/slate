@@ -5,11 +5,9 @@ language_tabs:
   - python
   - shell
 
-toc_footers:
-  - To sign up for API access, email us at info@appraisal.ai
-
 includes:
   - errors
+  - signup
 
 search: true
 ---
