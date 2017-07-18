@@ -6,7 +6,7 @@ language_tabs:
   - shell
 
 toc_footers:
-  - <a href='http://appraisal.ai/'>Sign Up for API access</a>
+  - To sign up for API access, email us at info@appraisal.ai
 
 includes:
   - errors
@@ -18,7 +18,7 @@ search: true
 
 Welcome to the Appraisal.AI API. You can use our API to retreive housing valuations.
 
-We have provided examples using Python and CURL. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have provided examples using Python and CURL. You can switch the programming language of the examples using the tabs. These tabs are in the navigation menu on the mobile version of the API docs.
 
 # Authentication
 
@@ -27,7 +27,7 @@ We have provided examples using Python and CURL. You can view code examples in t
 ```python
 import requests # The requests library: http://docs.python-requests.org
 
-login_endpoint = 'https://housing2.rationalinsights.com:5000/get_auth_token'
+login_endpoint = 'https://api.appraisal.ai/get_auth_token'
 
 login_request = requests.get(login_endpoint, auth=(username, password))
 
@@ -35,7 +35,7 @@ print login_request.json()
 ```
 
 ```shell
-curl "https://housing2.rationalinsights.com:5000/get_auth_token"
+curl "https://api.appraisal.ai/get_auth_token"
   -u "username:password"
 ```
 
@@ -61,7 +61,7 @@ Make sure to replace <code>username</code> and <code>password</code> with your u
 ```python
 import requests # The requests library: http://docs.python-requests.org
 
-valuation_endpoint = 'https://housing2.rationalinsights.com:5000/api/v1/getValuation'
+valuation_endpoint = 'https://api.appraisal.ai/api/v1/getValuation'
 
 data = {'address': '31724 Old Adams Road NE', 'city': 'Allegany', 'state': 'MD', 'zip': '33480'}
 
@@ -71,7 +71,7 @@ print valuation_request.json()
 ```
 
 ```shell
-curl "https://housing2.rationalinsights.com:5000/api/v1/getValuation"
+curl "https://api.appraisal.ai/api/v1/getValuation"
   -u "token:unused"
   -X POST
   -H "Content-Type: application/json"
@@ -91,7 +91,7 @@ This endpoint retrieves a specific valuation.
 
 ### HTTP Request
 
-`POST https://housing2.rationalinsights.com:5000/api/v1/getValuation`
+`POST https://api.appraisal.ai/api/v1/getValuation`
 
 ### Parameters
 
