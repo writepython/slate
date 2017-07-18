@@ -220,7 +220,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='http://appraisal.ai/'>Sign Up for API access</a></li>
+            <li>To sign up for API access, email us at info@appraisal.ai</li>
         </ul>
     </div>
     <div class="page-wrapper">
@@ -230,7 +230,7 @@
 
 <p>Welcome to the Appraisal.AI API. You can use our API to retreive housing valuations.</p>
 
-<p>We have provided examples using Python and CURL. You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>We have provided examples using Python and CURL. You can switch the programming language of the examples using the tabs. These tabs are in the navigation menu on the mobile version of the API docs.</p>
 
 <h1 id="authentication">Authentication</h1>
 
@@ -239,12 +239,12 @@
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># The requests library: http://docs.python-requests.org</span>
 
-<span class="n">login_endpoint</span> <span class="o">=</span> <span class="s">'https://housing2.rationalinsights.com:5000/get_auth_token'</span>
+<span class="n">login_endpoint</span> <span class="o">=</span> <span class="s">'https://api.appraisal.ai/get_auth_token'</span>
 
 <span class="n">login_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">login_endpoint</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">))</span>
 
 <span class="k">print</span> <span class="n">login_request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://housing2.rationalinsights.com:5000/get_auth_token"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.appraisal.ai/get_auth_token"</span>
   -u <span class="s2">"username:password"</span>
 </code></pre>
 <blockquote>
@@ -269,14 +269,14 @@ Make sure to replace <code>username</code> and <code>password</code> with your u
 </blockquote>
 <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># The requests library: http://docs.python-requests.org</span>
 
-<span class="n">valuation_endpoint</span> <span class="o">=</span> <span class="s">'https://housing2.rationalinsights.com:5000/api/v1/getValuation'</span>
+<span class="n">valuation_endpoint</span> <span class="o">=</span> <span class="s">'https://api.appraisal.ai/api/v1/getValuation'</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'address'</span><span class="p">:</span> <span class="s">'31724 Old Adams Road NE'</span><span class="p">,</span> <span class="s">'city'</span><span class="p">:</span> <span class="s">'Allegany'</span><span class="p">,</span> <span class="s">'state'</span><span class="p">:</span> <span class="s">'MD'</span><span class="p">,</span> <span class="s">'zip'</span><span class="p">:</span> <span class="s">'33480'</span><span class="p">}</span>
 
 <span class="n">valuation_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">valuation_endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 
 <span class="k">print</span> <span class="n">valuation_request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://housing2.rationalinsights.com:5000/api/v1/getValuation"</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.appraisal.ai/api/v1/getValuation"</span>
   -u <span class="s2">"token:unused"</span>
   -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
@@ -294,7 +294,7 @@ Make sure to replace <code>username</code> and <code>password</code> with your u
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">POST https://housing2.rationalinsights.com:5000/api/v1/getValuation</code></p>
+<p><code class="prettyprint">POST https://api.appraisal.ai/api/v1/getValuation</code></p>
 
 <h3 id="parameters">Parameters</h3>
 
