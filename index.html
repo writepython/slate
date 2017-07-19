@@ -200,7 +200,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;python&quot;,&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;python&quot;,&quot;javascript&quot;,&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -211,6 +211,7 @@
       <img src="images/logo.png" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="python">python</a>
+              <a href="#" data-language-name="javascript">javascript</a>
               <a href="#" data-language-name="shell">shell</a>
         </div>
         <div class="search">
@@ -241,6 +242,19 @@
 <span class="n">login_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">login_endpoint</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">))</span>
 
 <span class="k">print</span> <span class="n">login_request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="c1">// Node.js</span>
+<span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">login_endpoint</span> <span class="o">=</span> <span class="s1">'https://api.appraisal.ai/get_auth_token'</span>
+
+<span class="nx">request</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="nx">login_endpoint</span><span class="p">,</span>
+    <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">user</span><span class="p">:</span> <span class="nx">username</span><span class="p">,</span>
+        <span class="na">pass</span><span class="p">:</span> <span class="nx">password</span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.appraisal.ai/get_auth_token"</span>
   -u <span class="s2">"username:password"</span>
 </code></pre>
@@ -273,6 +287,28 @@ Make sure to replace <code>username</code> and <code>password</code> with your u
 <span class="n">valuation_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">valuation_endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 
 <span class="k">print</span> <span class="n">valuation_request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="c1">// Node.js</span>
+<span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">valuation_endpoint</span> <span class="o">=</span> <span class="s1">'https://api.appraisal.ai/api/v1/getValuation'</span>
+
+<span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'address'</span><span class="p">:</span> <span class="s1">'31724 Old Adams Road NE'</span><span class="p">,</span>
+    <span class="s1">'city'</span><span class="p">:</span> <span class="s1">'Allegany'</span><span class="p">,</span>
+    <span class="s1">'state'</span><span class="p">:</span> <span class="s1">'MD'</span><span class="p">,</span>
+    <span class="s1">'zip'</span><span class="p">:</span> <span class="s1">'33480'</span>
+<span class="p">}</span>
+
+<span class="nx">request</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="nx">valuation_endpoint</span><span class="p">,</span>
+    <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+    <span class="na">json</span><span class="p">:</span> <span class="nx">data</span><span class="p">,</span>
+    <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">user</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
+        <span class="na">pass</span><span class="p">:</span> <span class="s1">'unused'</span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
 </code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.appraisal.ai/api/v1/getValuation"</span>
   -u <span class="s2">"token:unused"</span>
   -X POST
@@ -368,6 +404,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="python">python</a>
+                <a href="#" data-language-name="javascript">javascript</a>
                 <a href="#" data-language-name="shell">shell</a>
           </div>
       </div>
