@@ -3,6 +3,7 @@ title: API Reference
 
 language_tabs:
   - python
+  - javascript
   - shell
 
 includes:
@@ -30,6 +31,22 @@ login_endpoint = 'https://api.appraisal.ai/get_auth_token'
 login_request = requests.get(login_endpoint, auth=(username, password))
 
 print login_request.json()
+```
+
+```javascript
+// Node.js
+var request = require('request');
+var login_endpoint = 'https://api.appraisal.ai/get_auth_token'
+
+request({
+    url: login_endpoint,
+    auth: {
+        user: username,
+        pass: password
+    }
+}, function (error, response, body) {
+    console.log(body);
+});
 ```
 
 ```shell
@@ -66,6 +83,31 @@ data = {'address': '31724 Old Adams Road NE', 'city': 'Allegany', 'state': 'MD',
 valuation_request = requests.post(valuation_endpoint, json=data, auth=(token, ''))
 
 print valuation_request.json()
+```
+
+```javascript
+// Node.js
+var request = require('request');
+var valuation_endpoint = 'https://api.appraisal.ai/api/v1/getValuation'
+
+data = {
+    'address': '31724 Old Adams Road NE',
+    'city': 'Allegany',
+    'state': 'MD',
+    'zip': '33480'
+}
+
+request({
+    url: valuation_endpoint,
+    method: 'POST',
+    json: data,
+    auth: {
+        user: token,
+        pass: 'unused'
+    }
+}, function (error, response, body) {
+    console.log(body);
+});
 ```
 
 ```shell
