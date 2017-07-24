@@ -122,7 +122,6 @@ curl "https://api.appraisal.ai/api/v1/getValuation"
 
 ```json
 {
-  "date": "2017-07-13T00:00:00",
   "valuation": 59000
 }
 ```
