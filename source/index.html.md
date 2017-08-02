@@ -67,11 +67,11 @@ This endpoint requires a username and password and returns json containing a tok
 Make sure to replace <code>username</code> and <code>password</code> with your username and password.
 </aside>
 
-# Valuations
+# Property Valuations
 
 ## Get Valuation
 
-> To get a housing valuation, use this code:
+> To get a housing valuation for a single property, use this code:
 
 ```python
 import requests # The requests library: http://docs.python-requests.org
@@ -126,7 +126,7 @@ curl "https://api.appraisal.ai/api/v1/getValuation"
 }
 ```
 
-This endpoint retrieves a specific valuation.
+This endpoint retrieves the valuation of a single property.
 
 ### HTTP Request
 
@@ -146,7 +146,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 
 ## Get Valuation History
 
-> To get valuation history, use this code:
+> To get valuation history for a single property, use this code:
 
 ```python
 import requests # The requests library: http://docs.python-requests.org
@@ -217,7 +217,7 @@ curl "https://api.appraisal.ai/api/v1/getValuationHistory"
 }
 ```
 
-This endpoint retrieves valuation history.
+This endpoint retrieves valuation history of a single property.
 
 ### HTTP Request
 
@@ -225,13 +225,124 @@ This endpoint retrieves valuation history.
 
 ### Parameters
 
-Parameter | Type | Required 
---------- | ---- | --------
-address | json string | yes
-city | json string | yes
-state | json string | yes
-start_date | json string | yes
-end_date | json string | yes
+Parameter | Type | Required | Default
+--------- | ---- | -------- | -------
+address | json string | yes |
+city | json string | yes |
+state | json string | yes |
+start_date | json string | yes |
+end_date | json string | yes | today
+
+<aside class="info">
+Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
+</aside>
+
+
+# Geographic Area Valuations
+
+## Get Price Index
+
+> To get the price index history for a particular zip code, use this code:
+
+```python
+import requests # The requests library: http://docs.python-requests.org
+
+price_index_endpoint = 'http://api.appraisal.ai/api/v1/getPriceIndex'
+
+data = {'area_type': 'zip', 'area_id': '11361',
+        'start_date': '2015-01-01', 'end_date': '2017-03-01'}
+
+price_index_request = requests.post(price_index_endpoint, json=data, auth=(token, ''))
+
+print price_index_request.json()
+```
+
+```javascript
+// Node.js
+var request = require('request');
+var price_index_endpoint = 'https://api.appraisal.ai/api/v1/getPriceIndex'
+
+data = {
+    'area_type': 'zip',
+    'area_id': '11361',
+    'start_date': '2015-01-01',
+    'end_date': '2017-03-01'
+}
+
+request({
+    url: price_index_endpoint,
+    method: 'POST',
+    json: data,
+    auth: {
+        user: token,
+        pass: 'unused'
+    }
+}, function (error, response, body) {
+    console.log(body);
+});
+```
+
+```shell
+curl "https://api.appraisal.ai/api/v1/getPriceIndex"
+  -u "token:unused"
+  -X POST
+  -H "Content-Type: application/json"
+  -d '{"area_type": "zip", "area_id": "11361",
+       "start_date": "2015-01-01", "end_date": "2017-03-01"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "model_version": "1.0",
+  "valuations": [
+    {
+      "date": "2017-03-01",
+      "valuation": 202000
+    },
+    {
+      "date": "2016-11-01",
+      "valuation": 194000},
+    {
+      "date": "2015-03-01",
+      "valuation": 199000
+    }
+  ]
+}
+```
+
+This endpoint retrieves price indexes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistics Area.
+
+### HTTP Request
+
+`POST https://api.appraisal.ai/api/v1/getPriceIndex`
+
+### Area Types
+
+Area Type | Parameter | Type | Required | Default | Acceptable Values (Case Insensitive) 
+--------- | ---- | -------- | ------- | ------------------------------------
+area_type | json string | yes | | 'state', 'county', 'tract', 'zip', 'cbsa', 'csa'
+
+### Parameters
+
+Parameter | Type | Required | Default
+--------- | ---- | -------- | -------
+area_type | json string | yes |
+area_id | json string | yes |
+start_date | json string | yes |
+end_date | json string | yes | today
+
+### Area Types
+
+area_type | Description
+--------- | -----------
+'state' | FIPS State ID
+'county' | FIPS County ID
+'tract' | Census Tract ID
+'zip' | 5 Digit Zip Code
+'cbsa' | Core Based Statistical Area ID
+'csa' | Core Statistical Area ID
 
 <aside class="info">
 Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
