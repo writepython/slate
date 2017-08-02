@@ -318,12 +318,6 @@ This endpoint retrieves price indexes for various geographical areas: State, Cou
 
 `POST https://api.appraisal.ai/api/v1/getPriceIndex`
 
-### Area Types
-
-Area Type | Parameter | Type | Required | Default | Acceptable Values (Case Insensitive) 
---------- | ---- | -------- | ------- | ------------------------------------
-area_type | json string | yes | | 'state', 'county', 'tract', 'zip', 'cbsa', 'csa'
-
 ### Parameters
 
 Parameter | Type | Required | Default
@@ -337,12 +331,94 @@ end_date | json string | yes | today
 
 area_type | Description
 --------- | -----------
-'state' | FIPS State ID
-'county' | FIPS County ID
-'tract' | Census Tract ID
-'zip' | 5 Digit Zip Code
-'cbsa' | Core Based Statistical Area ID
-'csa' | Core Statistical Area ID
+state | FIPS State ID
+county | FIPS County ID
+tract | Census Tract ID
+zip | 5 Digit Zip Code
+cbsa | Core Based Statistical Area ID
+csa | Core Statistical Area ID
+
+<aside class="info">
+Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
+</aside>
+
+## Get Area List
+
+> To get the list of Core Based Statistical Area IDs, use this code:
+
+```python
+import requests # The requests library: http://docs.python-requests.org
+
+area_list_endpoint = 'http://api.appraisal.ai/api/v1/getAreaList'
+
+data = {'area_type': 'cbsa'}
+
+area_list_request = requests.post(area_list_endpoint, json=data, auth=(token, ''))
+
+print area_list_request.json()
+```
+
+```javascript
+// Node.js
+var request = require('request');
+var area_list_endpoint = 'https://api.appraisal.ai/api/v1/getAreaList'
+
+data = {
+    'area_type': 'cbsa'
+}
+
+request({
+    url: area_list_endpoint,
+    method: 'POST',
+    json: data,
+    auth: {
+        user: token,
+        pass: 'unused'
+    }
+}, function (error, response, body) {
+    console.log(body);
+});
+```
+
+```shell
+curl "https://api.appraisal.ai/api/v1/getAreaList"
+  -u "token:unused"
+  -X POST
+  -H "Content-Type: application/json"
+  -d '{"area_type": "cbsa"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "model_version": "1.0",
+  "area_ids": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+}
+```
+
+This endpoint retrieves a list of area IDs for a particular type of geographical area. You can use these area IDs to query the getPriceIndex endpoint and other geographical area based endpoints.
+
+### HTTP Request
+
+`POST https://api.appraisal.ai/api/v1/getAreaList`
+
+### Parameters
+
+Parameter | Type | Required
+--------- | ---- | --------
+area_type | json string | yes
+
+### Area Types
+
+area_type | Description
+--------- | -----------
+state | FIPS State ID
+county | FIPS County ID
+tract | Census Tract ID
+zip | 5 Digit Zip Code
+cbsa | Core Based Statistical Area ID
+csa | Core Statistical Area ID
 
 <aside class="info">
 Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
