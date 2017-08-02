@@ -621,6 +621,113 @@ Make sure to replace <code>token</code> with the token you received from the aut
 Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
 </aside>
 
+<h2 id="get-area-list">Get Area List</h2>
+
+<blockquote>
+<p>To get the list of Core Based Statistical Area IDs, use this code:</p>
+</blockquote>
+<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># The requests library: http://docs.python-requests.org</span>
+
+<span class="n">area_list_endpoint</span> <span class="o">=</span> <span class="s">'http://api.appraisal.ai/api/v1/getAreaList'</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'area_type'</span><span class="p">:</span> <span class="s">'cbsa'</span><span class="p">}</span>
+
+<span class="n">area_list_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">area_list_endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
+
+<span class="k">print</span> <span class="n">area_list_request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+</code></pre><pre class="highlight javascript tab-javascript"><code><span class="c1">// Node.js</span>
+<span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">area_list_endpoint</span> <span class="o">=</span> <span class="s1">'https://api.appraisal.ai/api/v1/getAreaList'</span>
+
+<span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'area_type'</span><span class="p">:</span> <span class="s1">'cbsa'</span>
+<span class="p">}</span>
+
+<span class="nx">request</span><span class="p">({</span>
+    <span class="na">url</span><span class="p">:</span> <span class="nx">area_list_endpoint</span><span class="p">,</span>
+    <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+    <span class="na">json</span><span class="p">:</span> <span class="nx">data</span><span class="p">,</span>
+    <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">user</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
+        <span class="na">pass</span><span class="p">:</span> <span class="s1">'unused'</span>
+    <span class="p">}</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.appraisal.ai/api/v1/getAreaList"</span>
+  -u <span class="s2">"token:unused"</span>
+  -X POST
+  -H <span class="s2">"Content-Type: application/json"</span>
+  -d <span class="s1">'{"area_type": "cbsa"}'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"model_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"area_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w"> </span><span class="s2">"8"</span><span class="p">,</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w"> </span><span class="s2">"10"</span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a list of area IDs for a particular type of geographical area. You can use these area IDs to query the getPriceIndex endpoint and other geographical area based endpoints.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST https://api.appraisal.ai/api/v1/getAreaList</code></p>
+
+<h3 id="parameters">Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>area_type</td>
+<td>json string</td>
+<td>yes</td>
+</tr>
+</tbody></table>
+
+<h3 id="area-types">Area Types</h3>
+
+<table><thead>
+<tr>
+<th>area_type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>state</td>
+<td>FIPS State ID</td>
+</tr>
+<tr>
+<td>county</td>
+<td>FIPS County ID</td>
+</tr>
+<tr>
+<td>tract</td>
+<td>Census Tract ID</td>
+</tr>
+<tr>
+<td>zip</td>
+<td>5 Digit Zip Code</td>
+</tr>
+<tr>
+<td>cbsa</td>
+<td>Core Based Statistical Area ID</td>
+</tr>
+<tr>
+<td>csa</td>
+<td>Core Statistical Area ID</td>
+</tr>
+</tbody></table>
+
+<aside class="info">
+Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
+</aside>
+
           <h1 id="errors">Errors</h1>
 
 <p>The Appraisal.AI API uses the following error codes:</p>
