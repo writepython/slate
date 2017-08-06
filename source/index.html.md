@@ -237,6 +237,95 @@ end_date | json string | yes | today
 Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
 </aside>
 
+## Get Sales History
+
+> To get sales history for a single property, use this code:
+
+```python
+import requests # The requests library: http://docs.python-requests.org
+
+sales_history_endpoint = 'http://api.appraisal.ai/api/v1/getSalesHistory'
+
+data = {'address': '25084 NW 227TH DR', 'city': 'Alachua', 'state': 'FL',
+        'start_date': '2015-01-01', 'end_date': '2017-03-01'}
+
+sales_history_request = requests.post(sales_history_endpoint, json=data, auth=(token, ''))
+
+print sales_history_request.json()
+```
+
+```javascript
+// Node.js
+var request = require('request');
+var sales_history_endpoint = 'https://api.appraisal.ai/api/v1/getSalesHistory'
+
+data = {
+    'address': '25084 NW 227TH DR',
+    'city': 'Alachua',
+    'state': 'FL',
+    'start_date': '2015-01-01',
+    'end_date': '2017-03-01'
+}
+
+request({
+    url: sales_history_endpoint,
+    method: 'POST',
+    json: data,
+    auth: {
+        user: token,
+        pass: 'unused'
+    }
+}, function (error, response, body) {
+    console.log(body);
+});
+```
+
+```shell
+curl "https://api.appraisal.ai/api/v1/getSalesHistory"
+  -u "token:unused"
+  -X POST
+  -H "Content-Type: application/json"
+  -d '{"address": "25084 NW 227TH DR", "city": "Alachua", "state": "FL",
+       "start_date": "2017-01-01", "end_date": "2017-03-01"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "model_version": "1.0",
+  "sales": [
+    {
+      "date": "2015-05-15",
+      "price": 262000
+    },
+    {
+      "date": "2016-12-21",
+      "price": 279000},
+    }
+  ]
+}
+```
+
+This endpoint retrieves sales history of a single property.
+
+### HTTP Request
+
+`POST https://api.appraisal.ai/api/v1/getSalesHistory`
+
+### Parameters
+
+Parameter | Type | Required | Default
+--------- | ---- | -------- | -------
+address | json string | yes |
+city | json string | yes |
+state | json string | yes |
+start_date | json string | yes |
+end_date | json string | yes | today
+
+<aside class="info">
+Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
+</aside>
 
 # Geographic Area Indices
 
