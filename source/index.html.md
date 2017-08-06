@@ -154,7 +154,7 @@ import requests # The requests library: http://docs.python-requests.org
 valuation_history_endpoint = 'http://api.appraisal.ai/api/v1/getValuationHistory'
 
 data = {'address': '25084 NW 227TH DR', 'city': 'Alachua', 'state': 'FL',
-        'start_date': '2017-01-01', 'end_date': '2017-03-01'}
+              'start_date': '2017-01-01', 'end_date': '2017-03-01'}
 
 valuation_history_request = requests.post(valuation_history_endpoint, json=data, auth=(token, ''))
 
@@ -238,7 +238,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 </aside>
 
 
-# Geographic Area Valuations
+# Geographic Area Indices
 
 ## Get Price Index
 
@@ -250,7 +250,7 @@ import requests # The requests library: http://docs.python-requests.org
 price_index_endpoint = 'http://api.appraisal.ai/api/v1/getPriceIndex'
 
 data = {'area_type': 'zip', 'area_id': '11361',
-        'start_date': '2015-01-01', 'end_date': '2017-03-01'}
+              'start_date': '2015-01-01', 'end_date': '2017-03-01'}
 
 price_index_request = requests.post(price_index_endpoint, json=data, auth=(token, ''))
 
@@ -312,11 +312,114 @@ curl "https://api.appraisal.ai/api/v1/getPriceIndex"
 }
 ```
 
-This endpoint retrieves price indexes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistics Area.
+This endpoint retrieves price indexes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistical Area.
 
 ### HTTP Request
 
 `POST https://api.appraisal.ai/api/v1/getPriceIndex`
+
+### Parameters
+
+Parameter | Type | Required | Default
+--------- | ---- | -------- | -------
+area_type | json string | yes |
+area_id | json string | yes |
+start_date | json string | yes |
+end_date | json string | yes | today
+
+### Area Types
+
+area_type | Description
+--------- | -----------
+state | FIPS State ID
+county | FIPS County ID
+tract | Census Tract ID
+zip | 5 Digit Zip Code
+cbsa | Core Based Statistical Area ID
+csa | Core Statistical Area ID
+
+<aside class="info">
+Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
+</aside>
+
+## Get Price Index Relative Change
+
+> To get the relative change in price index for a particular zip code, use this code:
+
+```python
+import requests # The requests library: http://docs.python-requests.org
+
+price_index_relative_change_endpoint = 'http://api.appraisal.ai/api/v1/getPriceIndexRelativeChange'
+
+data = {'area_type': 'zip', 'area_id': '11361',
+              'start_date': '2017-01-01', 'end_date': '2017-03-01'}
+
+price_index_relative_change_request = requests.post(price_index_relative_change_endpoint, json=data, auth=(token, ''))
+
+print price_index_relative_change_request.json()
+```
+
+```javascript
+// Node.js
+var request = require('request');
+var price_index_relative_change_endpoint = 'https://api.appraisal.ai/api/v1/getPriceIndexRelativeChange'
+
+data = {
+    'area_type': 'zip',
+    'area_id': '11361',
+    'start_date': '2017-01-01',
+    'end_date': '2017-03-01'
+}
+
+request({
+    url: price_index_relative_change_endpoint,
+    method: 'POST',
+    json: data,
+    auth: {
+        user: token,
+        pass: 'unused'
+    }
+}, function (error, response, body) {
+    console.log(body);
+});
+```
+
+```shell
+curl "https://api.appraisal.ai/api/v1/getPriceIndexRelativeChange"
+  -u "token:unused"
+  -X POST
+  -H "Content-Type: application/json"
+  -d '{"area_type": "zip", "area_id": "11361",
+       "start_date": "2017-01-01", "end_date": "2017-03-01"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "model_version": "1.0",
+  "relative_changes": [
+    {
+      "date": "2017-03-01",
+      "change": 0.13646
+    },
+    {
+      "date": "2017-02-01",
+      "change": 0.3398647
+    },
+    {
+      "date": "2017-01-01",
+      "change": -0.06240
+    }
+  ]
+}
+```
+
+This endpoint retrieves price indexes relative changes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistical Area.
+
+### HTTP Request
+
+`POST https://api.appraisal.ai/api/v1/getPriceIndexRelativeChange`
 
 ### Parameters
 
@@ -397,7 +500,7 @@ curl "https://api.appraisal.ai/api/v1/getAreaList"
 }
 ```
 
-This endpoint retrieves a list of area IDs for a particular type of geographical area. You can use these area IDs to query the getPriceIndex endpoint and other geographical area based endpoints.
+This endpoint retrieves a list of area IDs for a particular type of geographical area. You can use these area IDs to query the getPriceIndex endpoint, the getPriceIndexRelativeChange endpoint and any other geographical area based endpoints.
 
 ### HTTP Request
 
