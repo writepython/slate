@@ -208,7 +208,8 @@ curl "https://api.appraisal.ai/api/v1/getValuationHistory"
     },
     {
       "date": "2017-02-01",
-      "valuation": 194000},
+      "valuation": 194000
+    },
     {
       "date": "2017-03-01",
       "valuation": 199000
