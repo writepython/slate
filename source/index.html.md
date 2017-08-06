@@ -154,7 +154,7 @@ import requests # The requests library: http://docs.python-requests.org
 valuation_history_endpoint = 'http://api.appraisal.ai/api/v1/getValuationHistory'
 
 data = {'address': '25084 NW 227TH DR', 'city': 'Alachua', 'state': 'FL',
-              'start_date': '2017-01-01', 'end_date': '2017-03-01'}
+        'start_date': '2017-01-01', 'end_date': '2017-03-01'}
 
 valuation_history_request = requests.post(valuation_history_endpoint, json=data, auth=(token, ''))
 
@@ -250,7 +250,7 @@ import requests # The requests library: http://docs.python-requests.org
 price_index_endpoint = 'http://api.appraisal.ai/api/v1/getPriceIndex'
 
 data = {'area_type': 'zip', 'area_id': '11361',
-              'start_date': '2015-01-01', 'end_date': '2017-03-01'}
+        'start_date': '2015-01-01', 'end_date': '2017-03-01'}
 
 price_index_request = requests.post(price_index_endpoint, json=data, auth=(token, ''))
 
@@ -352,7 +352,7 @@ import requests # The requests library: http://docs.python-requests.org
 price_index_relative_change_endpoint = 'http://api.appraisal.ai/api/v1/getPriceIndexRelativeChange'
 
 data = {'area_type': 'zip', 'area_id': '11361',
-              'start_date': '2017-01-01', 'end_date': '2017-03-01'}
+        'start_date': '2015-01-01', 'end_date': '2017-03-01'}
 
 price_index_relative_change_request = requests.post(price_index_relative_change_endpoint, json=data, auth=(token, ''))
 
