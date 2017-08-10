@@ -339,7 +339,7 @@ import requests # The requests library: http://docs.python-requests.org
 
 price_index_endpoint = 'http://api.appraisal.ai/api/v1/getPriceIndex'
 
-data = {'area_type': 'zip', 'area_id': '11361',
+data = {'area_type': 'zip', 'zip_code': '11361',
         'start_date': '2015-01-01', 'end_date': '2017-03-01'}
 
 price_index_request = requests.post(price_index_endpoint, json=data, auth=(token, ''))
@@ -354,7 +354,7 @@ var price_index_endpoint = 'https://api.appraisal.ai/api/v1/getPriceIndex'
 
 data = {
     'area_type': 'zip',
-    'area_id': '11361',
+    'zip_code': '11361',
     'start_date': '2015-01-01',
     'end_date': '2017-03-01'
 }
@@ -377,7 +377,7 @@ curl "https://api.appraisal.ai/api/v1/getPriceIndex"
   -u "token:unused"
   -X POST
   -H "Content-Type: application/json"
-  -d '{"area_type": "zip", "area_id": "11361",
+  -d '{"area_type": "zip", "zip_code": "11361",
        "start_date": "2015-01-01", "end_date": "2017-03-01"}'
 ```
 
@@ -403,6 +403,8 @@ curl "https://api.appraisal.ai/api/v1/getPriceIndex"
 ```
 
 This endpoint retrieves price indexes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistical Area.
+Retrieving data by County requires you specify State ID and County ID.
+Retrieving data by Census Tract requires you specify State ID, County ID, and Census Tract ID.
 
 ### HTTP Request
 
@@ -410,17 +412,22 @@ This endpoint retrieves price indexes for various geographical areas: State, Cou
 
 ### Parameters
 
-Parameter | Type | Required | Default
---------- | ---- | -------- | -------
-area_type | json string | yes |
-area_id | json string | yes |
-start_date | json string | yes |
-end_date | json string | yes | today
+Parameter | Type | Required | Default | Additional Info
+--------- | ---- | -------- | ------- | ---------------
+area_type | json string | yes | | Options listed below
+start_date | json string | yes | |
+end_date | json string | yes | today |
+state_id | json string | see below | |
+county_id | json string | see below | |
+census_tract_id | json string | see below | |
+zip_code | json string | see below | |
+cbsa_id | json string | see below | |
+csa_id | json string | see below | |
 
-### Area Types
+### Area Type Options
 
-area_type | Description
---------- | -----------
+area_type | Additional Required Parameters
+--------- | ------------------------------
 state | FIPS State ID
 county | FIPS County ID
 tract | Census Tract ID
