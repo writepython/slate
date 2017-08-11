@@ -601,7 +601,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 
 <span class="n">price_index_endpoint</span> <span class="o">=</span> <span class="s">'http://api.appraisal.ai/api/v1/getPriceIndex'</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'area_type'</span><span class="p">:</span> <span class="s">'zip'</span><span class="p">,</span> <span class="s">'area_id'</span><span class="p">:</span> <span class="s">'11361'</span><span class="p">,</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'area_type'</span><span class="p">:</span> <span class="s">'zip'</span><span class="p">,</span> <span class="s">'zip_code'</span><span class="p">:</span> <span class="s">'11361'</span><span class="p">,</span>
         <span class="s">'start_date'</span><span class="p">:</span> <span class="s">'2015-01-01'</span><span class="p">,</span> <span class="s">'end_date'</span><span class="p">:</span> <span class="s">'2017-03-01'</span><span class="p">}</span>
 
 <span class="n">price_index_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">price_index_endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
@@ -613,7 +613,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 
 <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'area_type'</span><span class="p">:</span> <span class="s1">'zip'</span><span class="p">,</span>
-    <span class="s1">'area_id'</span><span class="p">:</span> <span class="s1">'11361'</span><span class="p">,</span>
+    <span class="s1">'zip_code'</span><span class="p">:</span> <span class="s1">'11361'</span><span class="p">,</span>
     <span class="s1">'start_date'</span><span class="p">:</span> <span class="s1">'2015-01-01'</span><span class="p">,</span>
     <span class="s1">'end_date'</span><span class="p">:</span> <span class="s1">'2017-03-01'</span>
 <span class="p">}</span>
@@ -633,7 +633,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
   -u <span class="s2">"token:unused"</span>
   -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"area_type": "zip", "area_id": "11361",
+  -d <span class="s1">'{"area_type": "zip", "zip_code": "11361",
        "start_date": "2015-01-01", "end_date": "2017-03-01"}'</span>
 </code></pre>
 <blockquote>
@@ -656,7 +656,9 @@ Make sure to replace <code>token</code> with the token you received from the aut
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves price indexes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistical Area.</p>
+<p>This endpoint retrieves price indexes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistical Area.
+Retrieving data by County requires you specify State ID and County ID.
+Retrieving data by Census Tract requires you specify State ID, County ID, and Census Tract ID.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -670,6 +672,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 <th>Type</th>
 <th>Required</th>
 <th>Default</th>
+<th>Additional Info</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -677,17 +680,13 @@ Make sure to replace <code>token</code> with the token you received from the aut
 <td>json string</td>
 <td>yes</td>
 <td></td>
-</tr>
-<tr>
-<td>area_id</td>
-<td>json string</td>
-<td>yes</td>
-<td></td>
+<td>Options listed below</td>
 </tr>
 <tr>
 <td>start_date</td>
 <td>json string</td>
 <td>yes</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -695,40 +694,83 @@ Make sure to replace <code>token</code> with the token you received from the aut
 <td>json string</td>
 <td>yes</td>
 <td>today</td>
+<td></td>
+</tr>
+<tr>
+<td>state_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>FIPS State ID</td>
+</tr>
+<tr>
+<td>county_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>FIPS County ID</td>
+</tr>
+<tr>
+<td>census_tract_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>Census Tract ID</td>
+</tr>
+<tr>
+<td>zip_code</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>5 Digit Zip Code</td>
+</tr>
+<tr>
+<td>cbsa_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>Core Based Statistical Area ID</td>
+</tr>
+<tr>
+<td>csa_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>Core Statistical Area ID</td>
 </tr>
 </tbody></table>
 
-<h3 id="area-types">Area Types</h3>
+<h3 id="area-type-options">Area Type Options</h3>
 
 <table><thead>
 <tr>
 <th>area_type</th>
-<th>Description</th>
+<th>Additional Required Parameters</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>state</td>
-<td>FIPS State ID</td>
+<td>state_id</td>
 </tr>
 <tr>
 <td>county</td>
-<td>FIPS County ID</td>
+<td>state_id, county_id</td>
 </tr>
 <tr>
 <td>tract</td>
-<td>Census Tract ID</td>
+<td>state_id, county_id, census_tract_id</td>
 </tr>
 <tr>
 <td>zip</td>
-<td>5 Digit Zip Code</td>
+<td>zip_code</td>
 </tr>
 <tr>
 <td>cbsa</td>
-<td>Core Based Statistical Area ID</td>
+<td>cbsa_id</td>
 </tr>
 <tr>
 <td>csa</td>
-<td>Core Statistical Area ID</td>
+<td>csa_id</td>
 </tr>
 </tbody></table>
 
@@ -745,7 +787,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 
 <span class="n">price_index_relative_change_endpoint</span> <span class="o">=</span> <span class="s">'http://api.appraisal.ai/api/v1/getPriceIndexRelativeChange'</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'area_type'</span><span class="p">:</span> <span class="s">'zip'</span><span class="p">,</span> <span class="s">'area_id'</span><span class="p">:</span> <span class="s">'11361'</span><span class="p">,</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'area_type'</span><span class="p">:</span> <span class="s">'zip'</span><span class="p">,</span> <span class="s">'zip_code'</span><span class="p">:</span> <span class="s">'11361'</span><span class="p">,</span>
         <span class="s">'start_date'</span><span class="p">:</span> <span class="s">'2015-01-01'</span><span class="p">,</span> <span class="s">'end_date'</span><span class="p">:</span> <span class="s">'2017-03-01'</span><span class="p">}</span>
 
 <span class="n">price_index_relative_change_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">price_index_relative_change_endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
@@ -757,7 +799,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 
 <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">'area_type'</span><span class="p">:</span> <span class="s1">'zip'</span><span class="p">,</span>
-    <span class="s1">'area_id'</span><span class="p">:</span> <span class="s1">'11361'</span><span class="p">,</span>
+    <span class="s1">'zip_code'</span><span class="p">:</span> <span class="s1">'11361'</span><span class="p">,</span>
     <span class="s1">'start_date'</span><span class="p">:</span> <span class="s1">'2017-01-01'</span><span class="p">,</span>
     <span class="s1">'end_date'</span><span class="p">:</span> <span class="s1">'2017-03-01'</span>
 <span class="p">}</span>
@@ -777,7 +819,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
   -u <span class="s2">"token:unused"</span>
   -X POST
   -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"area_type": "zip", "area_id": "11361",
+  -d <span class="s1">'{"area_type": "zip", "zip_code": "11361",
        "start_date": "2017-01-01", "end_date": "2017-03-01"}'</span>
 </code></pre>
 <blockquote>
@@ -801,13 +843,13 @@ Make sure to replace <code>token</code> with the token you received from the aut
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves price indexes relative changes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistical Area.</p>
+<p>This endpoint retrieves price indexes relative changes for various geographical areas: State, County, Census Tract, Zip Code, Core Based Statistical Area, and Core Statistical Area.
+Retrieving data by County requires you specify State ID and County ID.
+Retrieving data by Census Tract requires you specify State ID, County ID, and Census Tract ID.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">POST https://api.appraisal.ai/api/v1/getPriceIndexRelativeChange</code></p>
-
-<h3 id="parameters">Parameters</h3>
 
 <table><thead>
 <tr>
@@ -815,6 +857,7 @@ Make sure to replace <code>token</code> with the token you received from the aut
 <th>Type</th>
 <th>Required</th>
 <th>Default</th>
+<th>Additional Info</th>
 </tr>
 </thead><tbody>
 <tr>
@@ -822,17 +865,13 @@ Make sure to replace <code>token</code> with the token you received from the aut
 <td>json string</td>
 <td>yes</td>
 <td></td>
-</tr>
-<tr>
-<td>area_id</td>
-<td>json string</td>
-<td>yes</td>
-<td></td>
+<td>Options listed below</td>
 </tr>
 <tr>
 <td>start_date</td>
 <td>json string</td>
 <td>yes</td>
+<td></td>
 <td></td>
 </tr>
 <tr>
@@ -840,147 +879,83 @@ Make sure to replace <code>token</code> with the token you received from the aut
 <td>json string</td>
 <td>yes</td>
 <td>today</td>
-</tr>
-</tbody></table>
-
-<h3 id="area-types">Area Types</h3>
-
-<table><thead>
-<tr>
-<th>area_type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>state</td>
-<td>FIPS State ID</td>
+<td></td>
 </tr>
 <tr>
-<td>county</td>
-<td>FIPS County ID</td>
-</tr>
-<tr>
-<td>tract</td>
-<td>Census Tract ID</td>
-</tr>
-<tr>
-<td>zip</td>
-<td>5 Digit Zip Code</td>
-</tr>
-<tr>
-<td>cbsa</td>
-<td>Core Based Statistical Area ID</td>
-</tr>
-<tr>
-<td>csa</td>
-<td>Core Statistical Area ID</td>
-</tr>
-</tbody></table>
-
-<aside class="info">
-Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
-</aside>
-
-<h2 id="get-area-list">Get Area List</h2>
-
-<blockquote>
-<p>To get the list of Core Based Statistical Area IDs, use this code:</p>
-</blockquote>
-<pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">requests</span> <span class="c"># The requests library: http://docs.python-requests.org</span>
-
-<span class="n">area_list_endpoint</span> <span class="o">=</span> <span class="s">'http://api.appraisal.ai/api/v1/getAreaList'</span>
-
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'area_type'</span><span class="p">:</span> <span class="s">'cbsa'</span><span class="p">}</span>
-
-<span class="n">area_list_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">area_list_endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
-
-<span class="k">print</span> <span class="n">area_list_request</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="c1">// Node.js</span>
-<span class="kd">var</span> <span class="nx">request</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'request'</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">area_list_endpoint</span> <span class="o">=</span> <span class="s1">'https://api.appraisal.ai/api/v1/getAreaList'</span>
-
-<span class="nx">data</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'area_type'</span><span class="p">:</span> <span class="s1">'cbsa'</span>
-<span class="p">}</span>
-
-<span class="nx">request</span><span class="p">({</span>
-    <span class="na">url</span><span class="p">:</span> <span class="nx">area_list_endpoint</span><span class="p">,</span>
-    <span class="na">method</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
-    <span class="na">json</span><span class="p">:</span> <span class="nx">data</span><span class="p">,</span>
-    <span class="na">auth</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">user</span><span class="p">:</span> <span class="nx">token</span><span class="p">,</span>
-        <span class="na">pass</span><span class="p">:</span> <span class="s1">'unused'</span>
-    <span class="p">}</span>
-<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">response</span><span class="p">,</span> <span class="nx">body</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">body</span><span class="p">);</span>
-<span class="p">});</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"https://api.appraisal.ai/api/v1/getAreaList"</span>
-  -u <span class="s2">"token:unused"</span>
-  -X POST
-  -H <span class="s2">"Content-Type: application/json"</span>
-  -d <span class="s1">'{"area_type": "cbsa"}'</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"model_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1.0"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"area_ids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"1"</span><span class="p">,</span><span class="w"> </span><span class="s2">"2"</span><span class="p">,</span><span class="w"> </span><span class="s2">"3"</span><span class="p">,</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w"> </span><span class="s2">"5"</span><span class="p">,</span><span class="w"> </span><span class="s2">"6"</span><span class="p">,</span><span class="w"> </span><span class="s2">"7"</span><span class="p">,</span><span class="w"> </span><span class="s2">"8"</span><span class="p">,</span><span class="w"> </span><span class="s2">"9"</span><span class="p">,</span><span class="w"> </span><span class="s2">"10"</span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a list of area IDs for a particular type of geographical area. You can use these area IDs to query the getPriceIndex endpoint, the getPriceIndexRelativeChange endpoint and any other geographical area based endpoints.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">POST https://api.appraisal.ai/api/v1/getAreaList</code></p>
-
-<h3 id="parameters">Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Type</th>
-<th>Required</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>area_type</td>
+<td>state_id</td>
 <td>json string</td>
-<td>yes</td>
+<td>see below</td>
+<td></td>
+<td>FIPS State ID</td>
+</tr>
+<tr>
+<td>county_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>FIPS County ID</td>
+</tr>
+<tr>
+<td>census_tract_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>Census Tract ID</td>
+</tr>
+<tr>
+<td>zip_code</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>5 Digit Zip Code</td>
+</tr>
+<tr>
+<td>cbsa_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>Core Based Statistical Area ID</td>
+</tr>
+<tr>
+<td>csa_id</td>
+<td>json string</td>
+<td>see below</td>
+<td></td>
+<td>Core Statistical Area ID</td>
 </tr>
 </tbody></table>
 
-<h3 id="area-types">Area Types</h3>
+<h3 id="area-type-options">Area Type Options</h3>
 
 <table><thead>
 <tr>
 <th>area_type</th>
-<th>Description</th>
+<th>Additional Required Parameters</th>
 </tr>
 </thead><tbody>
 <tr>
 <td>state</td>
-<td>FIPS State ID</td>
+<td>state_id</td>
 </tr>
 <tr>
 <td>county</td>
-<td>FIPS County ID</td>
+<td>state_id, county_id</td>
 </tr>
 <tr>
 <td>tract</td>
-<td>Census Tract ID</td>
+<td>state_id, county_id, census_tract_id</td>
 </tr>
 <tr>
 <td>zip</td>
-<td>5 Digit Zip Code</td>
+<td>zip_code</td>
 </tr>
 <tr>
 <td>cbsa</td>
-<td>Core Based Statistical Area ID</td>
+<td>cbsa_id</td>
 </tr>
 <tr>
 <td>csa</td>
-<td>Core Statistical Area ID</td>
+<td>csa_id</td>
 </tr>
 </tbody></table>
 
