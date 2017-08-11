@@ -430,7 +430,7 @@ area_type | Additional Required Parameters
 --------- | ------------------------------
 state | state_id
 county | state_id, county_id
-tract | state_id, county_id, census_tract_id
+census_tract | state_id, county_id, census_tract_id
 zip | zip_code
 cbsa | cbsa_id
 csa | csa_id
@@ -538,7 +538,7 @@ area_type | Additional Required Parameters
 --------- | ------------------------------
 state | state_id
 county | state_id, county_id
-tract | state_id, county_id, census_tract_id
+census_tract | state_id, county_id, census_tract_id
 zip | zip_code
 cbsa | cbsa_id
 csa | csa_id
