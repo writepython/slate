@@ -17,8 +17,8 @@ HTTP Error Code | Meaning
 
 The Appraisal.AI API uses the following error codes in the JSON response data:
 
-Error Code | Description | Corresponding HTTP Error Code
---------------- | --------------- | -------------------------------------------
+Error Code | Description | Associated HTTP Status Code
+--------------- | --------------- | ----------------------------------------
 1 | Missing parameters - Your request is missing a required parameter | 400
 2 | Invalid parameters - One of the parameters in your request is invalid | 400
 3 | Improperly formatted date - Date should be ISO 8601 format YYYY-MM-DD | 400
