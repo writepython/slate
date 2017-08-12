@@ -963,13 +963,13 @@ Retrieving data by Census Tract requires you specify State ID, County ID, and Ce
 Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
 </aside>
 
-          <h1 id="errors">Errors</h1>
+          <h1 id="http-error-codes">HTTP Error Codes</h1>
 
-<p>The Appraisal.AI API uses the following error codes:</p>
+<p>The Appraisal.AI API uses the following HTTP error codes:</p>
 
 <table><thead>
 <tr>
-<th>Error Code</th>
+<th>HTTP Error Code</th>
 <th>Meaning</th>
 </tr>
 </thead><tbody>
@@ -992,6 +992,59 @@ Make sure to replace <code>token</code> with the token you received from the aut
 <tr>
 <td>500</td>
 <td>Internal Server Error</td>
+</tr>
+</tbody></table>
+
+<h1 id="json-error-codes">JSON Error Codes</h1>
+
+<p>The Appraisal.AI API uses the following error codes in the JSON response data:</p>
+
+<table><thead>
+<tr>
+<th>Error Code</th>
+<th>Description</th>
+<th>Corresponding HTTP Error Code</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>Missing parameters - Your request is missing a required parameter</td>
+<td>400</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Invalid parameters - One of the parameters in your request is invalid</td>
+<td>400</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Improperly formatted date - Date should be ISO 8601 format YYYY-MM-DD</td>
+<td>400</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Property not found</td>
+<td>200</td>
+</tr>
+<tr>
+<td>5</td>
+<td>No valuation for this property</td>
+<td>200</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Invalid user credentials</td>
+<td>401</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Invalid token - Please re-authenticate</td>
+<td>401</td>
+</tr>
+<tr>
+<td>8</td>
+<td>Usage limit exceeded</td>
+<td>403</td>
 </tr>
 </tbody></table>
 
