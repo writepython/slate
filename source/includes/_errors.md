@@ -1,4 +1,6 @@
-# HTTP Error Codes
+# Error Codes
+
+## HTTP Error Codes
 
 The Appraisal.AI API uses the following HTTP error codes:
 
@@ -11,7 +13,7 @@ HTTP Error Code | Meaning
 500 | Internal Server Error
 
 
-# JSON Error Codes
+## JSON Error Codes
 
 The Appraisal.AI API uses the following error codes in the JSON response data:
 
