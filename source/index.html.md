@@ -115,7 +115,7 @@ curl "https://api.appraisal.ai/api/v1/getValuation"
   -u "token:unused"
   -X POST
   -H "Content-Type: application/json"
-  -d 'data = '{"address": "14370 Sedwick Ave", "city": "Solomons", "state": "MD", "zip_code": "20688"}'
+  -d '{"address": "14370 Sedwick Ave", "city": "Solomons", "state": "MD", "zip_code": "20688"}'
 ```
 
 > The above command returns JSON structured like this:
