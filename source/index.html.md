@@ -78,7 +78,7 @@ import requests # The requests library: http://docs.python-requests.org
 
 valuation_endpoint = 'https://api.appraisal.ai/api/v1/getValuation'
 
-data = {'address': '31724 Old Adams Road NE', 'city': 'Allegany', 'state': 'MD'}
+data = {'address': '14370 SEDWICK AVE', 'state': 'MD', 'city': 'Solomons', 'zip_code': '20688'}
 
 valuation_request = requests.post(valuation_endpoint, json=data, auth=(token, ''))
 
@@ -139,6 +139,7 @@ Parameter | Type | Required
 address | json string | yes
 city | json string | yes
 state | json string | yes
+zip_code | json string | yes
 
 <aside class="info">
 Make sure to replace <code>token</code> with the token you received from the authorization endpoint.
