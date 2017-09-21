@@ -282,7 +282,7 @@ Make sure to replace <code>username</code> and <code>password</code> with your u
 
 <span class="n">valuation_endpoint</span> <span class="o">=</span> <span class="s">'https://api.appraisal.ai/api/v1/getValuation'</span>
 
-<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'address'</span><span class="p">:</span> <span class="s">'31724 Old Adams Road NE'</span><span class="p">,</span> <span class="s">'city'</span><span class="p">:</span> <span class="s">'Allegany'</span><span class="p">,</span> <span class="s">'state'</span><span class="p">:</span> <span class="s">'MD'</span><span class="p">}</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s">'address'</span><span class="p">:</span> <span class="s">'14370 SEDWICK AVE'</span><span class="p">,</span> <span class="s">'state'</span><span class="p">:</span> <span class="s">'MD'</span><span class="p">,</span> <span class="s">'city'</span><span class="p">:</span> <span class="s">'Solomons'</span><span class="p">,</span> <span class="s">'zip_code'</span><span class="p">:</span> <span class="s">'20688'</span><span class="p">}</span>
 
 <span class="n">valuation_request</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">valuation_endpoint</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">data</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
 
@@ -349,6 +349,11 @@ Make sure to replace <code>username</code> and <code>password</code> with your u
 </tr>
 <tr>
 <td>state</td>
+<td>json string</td>
+<td>yes</td>
+</tr>
+<tr>
+<td>zip_code</td>
 <td>json string</td>
 <td>yes</td>
 </tr>
