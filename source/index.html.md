@@ -78,7 +78,7 @@ import requests # The requests library: http://docs.python-requests.org
 
 valuation_endpoint = 'https://api.appraisal.ai/api/v1/getValuation'
 
-data = {'address': '14370 SEDWICK AVE', 'state': 'MD', 'city': 'Solomons', 'zip_code': '20688'}
+data = {'address': '14370 Sedwick Ave', 'city': 'Solomons', 'state': 'MD', 'zip_code': '20688'}
 
 valuation_request = requests.post(valuation_endpoint, json=data, auth=(token, ''))
 
@@ -91,9 +91,10 @@ var request = require('request');
 var valuation_endpoint = 'https://api.appraisal.ai/api/v1/getValuation'
 
 data = {
-    'address': '31724 Old Adams Road NE',
-    'city': 'Allegany',
+    'address': '14370 Sedwick Ave',
+    'city': 'Solomons',
     'state': 'MD',
+    'zip_code': '20688'
 }
 
 request({
@@ -114,7 +115,7 @@ curl "https://api.appraisal.ai/api/v1/getValuation"
   -u "token:unused"
   -X POST
   -H "Content-Type: application/json"
-  -d '{"address": "31724 Old Adams Road NE", "city": "Allegany", "state": "MD"}'
+  -d 'data = '{"address": "14370 Sedwick Ave", "city": "Solomons", "state": "MD", "zip_code": "20688"}'
 ```
 
 > The above command returns JSON structured like this:
