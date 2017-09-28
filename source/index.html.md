@@ -155,7 +155,7 @@ import requests # The requests library: http://docs.python-requests.org
 
 valuation_history_endpoint = 'http://api.appraisal.ai/api/v1/getValuationHistory'
 
-data = {'address': '25084 NW 227TH DR', 'city': 'Alachua', 'state': 'FL',
+data = {'address': '14370 Sedwick Ave', 'city': 'Solomons', 'state': 'MD', 'zip_code': '20688',
         'start_date': '2017-01-01', 'end_date': '2017-03-01'}
 
 valuation_history_request = requests.post(valuation_history_endpoint, json=data, auth=(token, ''))
@@ -169,10 +169,11 @@ var request = require('request');
 var valuation_history_endpoint = 'https://api.appraisal.ai/api/v1/getValuationHistory'
 
 data = {
-    'address': '25084 NW 227TH DR',
-    'city': 'Alachua',
-    'state': 'FL',
-    'start_date': '2014-01-01',
+    'address': '14370 Sedwick Ave',
+    'city': 'Solomons',
+    'state': 'MD',
+    'zip_code': '20688',
+    'start_date': '2017-01-01',
     'end_date': '2017-03-01'
 }
 
@@ -194,7 +195,7 @@ curl "https://api.appraisal.ai/api/v1/getValuationHistory"
   -u "token:unused"
   -X POST
   -H "Content-Type: application/json"
-  -d '{"address": "25084 NW 227TH DR", "city": "Alachua", "state": "FL",
+  -d '{"address": "14370 Sedwick Ave", "city": "Solomons", "state": "MD", "zip_code": "20688",
        "start_date": "2017-01-01", "end_date": "2017-03-01"}'
 ```
 
