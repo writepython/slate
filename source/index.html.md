@@ -234,6 +234,7 @@ Parameter | Type | Required | Default
 address | json string | yes |
 city | json string | yes |
 state | json string | yes |
+zip_code | json string | yes
 start_date | json string | yes |
 end_date | json string | yes | today
 
